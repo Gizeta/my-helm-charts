@@ -1,6 +1,27 @@
 apiVersion: v1
 entries:
+  aria2:
+  - apiVersion: v2
+    appVersion: "202108221156"
+    created: "2022-02-04T19:06:45.840662629Z"
+    description: aria2
+    digest: 56a1eb4bf7ccbe6e588d2201209ce24eefd2d7f46299bf0ee08fb887a9dd736e
+    name: aria2
+    type: application
+    urls:
+    - https://github.com/Gizeta/my-helm-charts/releases/download/aria2-0.1.0/aria2-0.1.0.tgz
+    version: 0.1.0
   static-file-server:
+  - apiVersion: v2
+    appVersion: v1.8.5
+    created: "2022-02-04T19:06:45.955937062Z"
+    description: static-file-server
+    digest: 8fcc4e213b0dfb967f215f3d3d53df48dcadc3b2d34a9a2eb5dc626048ba1eeb
+    name: static-file-server
+    type: application
+    urls:
+    - https://github.com/Gizeta/my-helm-charts/releases/download/static-file-server-0.3.1/static-file-server-0.3.1.tgz
+    version: 0.3.1
   - apiVersion: v2
     appVersion: v1.8.5
     created: "2022-02-04T18:32:20.456805067Z"
@@ -31,4 +52,4 @@ entries:
     urls:
     - https://github.com/Gizeta/my-helm-charts/releases/download/static-file-server-0.1.1/static-file-server-0.1.1.tgz
     version: 0.1.1
-generated: "2022-02-04T18:32:20.456818267Z"
+generated: "2022-02-04T19:06:45.955963862Z"
