@@ -32,9 +32,57 @@ spec:
           imagePullPolicy: {{ .Values.image.pullPolicy }}
           volumeMounts:
             - name: webroot
-              mountPath: /web
+              mountPath: {{ default "/web" .Values.config.folder }}
               readOnly: true
             {{- with .Values.deployment.additionalVolumeMounts }}
+              {{- toYaml . | nindent 12 }}
+            {{- end }}
+          env:
+            {{- if .Values.config.cors }}
+            - name: CORS
+              value: {{ .Values.config.cors }}
+            {{- end }}
+            {{- if .Values.config.debug }}
+            - name: DEBUG
+              value: {{ .Values.config.debug }}
+            {{- end }}
+            {{- if .Values.config.host }}
+            - name: HOST
+              value: {{ .Values.config.host }}
+            {{- end }}
+            {{- if .Values.config.port }}
+            - name: PORT
+              value: {{ .Values.config.port }}
+            {{- end }}
+            {{- if .Values.config.showListing }}
+            - name: SHOW_LISTING
+              value: {{ .Values.config.showListing }}
+            {{- end }}
+            {{- if .Values.config.folder }}
+            - name: FOLDER
+              value: {{ .Values.config.folder }}
+            {{- end }}
+            {{- if .Values.config.urlPrefix }}
+            - name: URL_PREFIX
+              value: {{ .Values.config.urlPrefix }}
+            {{- end }}
+            {{- if .Values.config.tlsCert }}
+            - name: TLS_CERT
+              value: {{ .Values.config.tlsCert }}
+            {{- end }}
+            {{- if .Values.config.tlsKey }}
+            - name: TLS_KEY
+              value: {{ .Values.config.tlsKey }}
+            {{- end }}
+            {{- if .Values.config.tlsMinVers }}
+            - name: TLS_MIN_VERS
+              value: {{ .Values.config.tlsMinVers }}
+            {{- end }}
+            {{- if .Values.config.referrers }}
+            - name: REFERRERS
+              value: {{ .Values.config.referrers }}
+            {{- end }}
+            {{- with .Values.deployment.additionalEnvVars }}
               {{- toYaml . | nindent 12 }}
             {{- end }}
           args:
@@ -43,7 +91,7 @@ spec:
             {{- end }}
           ports:
             - name: http
-              containerPort: 8080
+              containerPort: {{ default 8080 .Values.config.port }}
               protocol: TCP
           resources:
             {{- toYaml .Values.resources | nindent 12 }}

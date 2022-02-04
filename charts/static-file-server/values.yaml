@@ -14,8 +14,22 @@ imagePullSecrets: []
 nameOverride: ""
 fullnameOverride: ""
 
+config: {}
+#  cors: false
+#  debug: false
+#  host: ""
+#  port: 8080
+#  showListing: true
+#  folder: /web
+#  urlPrefix: ""
+#  tlsCert: ""
+#  tlsKey: ""
+#  tlsMinVers: ""
+#  referrers: ""
+
 deployment:
   additionalVolumeMounts: []
+  additionalEnvVars: []
   additionalArguments: []
   additionalContainers: {}
   #  livenessProbe:
