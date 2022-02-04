@@ -1,0 +1,123 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ include "aria2.fullname" . }}
+  labels:
+    {{- include "aria2.labels" . | nindent 4 }}
+spec:
+  replicas: {{ default 1 .Values.replicaCount }}
+  selector:
+    matchLabels:
+      {{- include "aria2.selectorLabels" . | nindent 6 }}
+  template:
+    metadata:
+      {{- with .Values.podAnnotations }}
+      annotations:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+      labels:
+        {{- include "aria2.selectorLabels" . | nindent 8 }}
+    spec:
+      {{- with .Values.imagePullSecrets }}
+      imagePullSecrets:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+      securityContext:
+        {{- toYaml .Values.podSecurityContext | nindent 8 }}
+      containers:
+        - name: {{ .Chart.Name }}
+          securityContext:
+            {{- toYaml .Values.securityContext | nindent 12 }}
+          image: "{{ .Values.image.repository }}:{{ .Values.image.tag | default .Chart.AppVersion }}"
+          imagePullPolicy: {{ .Values.image.pullPolicy }}
+          volumeMounts:
+            - name: downloads-dirs
+              mountPath: /downloads
+            - name: config-dirs
+              mountPath: /config
+            {{- with .Values.deployment.additionalVolumeMounts }}
+              {{- toYaml . | nindent 12 }}
+            {{- end }}
+          env:
+            {{- if .Values.config.uid }}
+            - name: PUID
+              value: {{ .Values.config.uid }}
+            {{- end }}
+            {{- if .Values.config.gid }}
+            - name: PGID
+              value: {{ .Values.config.gid }}
+            {{- end }}
+            {{- if .Values.config.umask }}
+            - name: UMASK_SET
+              value: {{ .Values.config.umask }}
+            {{- end }}
+            {{- if .Values.config.rpcSecret }}
+            - name: RPC_SECRET
+              value: {{ .Values.config.rpcSecret }}
+            {{- end }}
+            {{- if .Values.config.rpcPort }}
+            - name: RPC_PORT
+              value: {{ .Values.config.rpcPort }}
+            {{- end }}
+            {{- if .Values.config.listenPort }}
+            - name: LISTEN_PORT
+              value: {{ .Values.config.listenPort }}
+            {{- end }}
+            {{- if .Values.config.diskCache }}
+            - name: DISK_CACHE
+              value: {{ .Values.config.diskCache }}
+            {{- end }}
+            {{- if .Values.config.ipv6Mode }}
+            - name: IPV6_MODE
+              value: {{ .Values.config.ipv6Mode }}
+            {{- end }}
+            {{- if .Values.config.updateTrackers }}
+            - name: UPDATE_TRACKERS
+              value: {{ .Values.config.updateTrackers }}
+            {{- end }}
+            {{- if .Values.config.customTrackerUrl }}
+            - name: CUSTOM_TRACKER_URL
+              value: {{ .Values.config.customTrackerUrl }}
+            {{- end }}
+            {{- if .Values.config.timezone }}
+            - name: TZ
+              value: {{ .Values.config.timezone }}
+            {{- end }}
+            {{- with .Values.deployment.additionalEnvVars }}
+              {{- toYaml . | nindent 12 }}
+            {{- end }}
+          args:
+            {{- with .Values.deployment.additionalArguments }}
+              {{- toYaml . | nindent 12 }}
+            {{- end }}
+          ports:
+            - name: rpc
+              containerPort: {{ default 6800 .Values.config.rpcPort }}
+              protocol: TCP
+            - name: bt-tcp
+              containerPort: {{ default 6888 .Values.config.listenPort }}
+              protocol: TCP
+            - name: dht-udp
+              containerPort: {{ default 6888 .Values.config.listenPort }}
+              protocol: UDP
+          resources:
+            {{- toYaml .Values.resources | nindent 12 }}
+          {{- with .Values.deployment.additionalContainers }}
+            {{- toYaml . | nindent 10 }}
+          {{- end }}
+      {{- with .Values.volumes }}
+      volumes:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+      {{- with .Values.nodeSelector }}
+      nodeSelector:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+      {{- with .Values.affinity }}
+      affinity:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+      {{- with .Values.tolerations }}
+      tolerations:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}

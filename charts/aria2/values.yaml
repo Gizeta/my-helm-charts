@@ -1,0 +1,111 @@
+# Default values for aria2.
+# This is a YAML-formatted file.
+# Declare variables to be passed into your templates.
+
+replicaCount: 1
+
+image:
+  repository: p3terx/aria2-pro
+  pullPolicy: IfNotPresent
+  # Overrides the image tag whose default is the chart appVersion.
+  tag: ""
+
+imagePullSecrets: []
+nameOverride: ""
+fullnameOverride: ""
+
+config: {}
+#  uid: 0
+#  gid: 0
+#  umask: "022"
+#  rpcSecret: P3TERX
+#  rpcPort: 6800
+#  listenPort: 6888
+#  diskCache: 64M
+#  ipv6Mode: false
+#  updateTrackers: true
+#  customTrackerUrl: https://trackerslist.com/all_aria2.txt
+#  timezone: Asia/Shanghai
+
+deployment:
+  additionalVolumeMounts: []
+  additionalEnvVars: []
+  additionalArguments: []
+  additionalContainers: {}
+  #  livenessProbe:
+  #    httpGet:
+  #      path: /
+  #      port: http
+  #  readinessProbe:
+  #    httpGet:
+  #      path: /
+  #      port: http
+
+volumes:
+  - name: downloads-dirs
+    emptyDir: {}
+  - name: config-dirs
+    emptyDir: {}
+
+podAnnotations: {}
+
+podSecurityContext: {}
+  # fsGroup: 2000
+
+securityContext: {}
+  # capabilities:
+  #   drop:
+  #   - ALL
+  # readOnlyRootFilesystem: true
+  # runAsNonRoot: true
+  # runAsUser: 1000
+
+service:
+  type: ClusterIP
+  port: 6800
+  btTcpPort: 6888
+  dhtUdpPort: 6888
+
+traefik:
+  ingressRoute:
+    enabled: false
+    annotations: {}
+    entryPoints:
+      - web
+    matchRule: Host(`example.domain.tld`)
+    # middlewares:
+    #   - name: example-middlewares
+    # serversTransport: example-server-transport 
+    # tls:
+    #   - secretName: example-secret
+  ingressRouteTcp:
+    enabled: false
+    annotations: {}
+    entryPoints: []
+    #  - aria2-tcp
+    matchRule: Host(`*`)
+    # middlewares:
+    #   - name: example-middlewares
+  ingressRouteUdp:
+    enabled: false
+    annotations: {}
+    entryPoints: []
+    #  - aria2-udp
+
+resources: {}
+  # We usually recommend not to specify default resources and to leave this as a conscious
+  # choice for the user. This also increases chances charts run on environments with little
+  # resources, such as Minikube. If you do want to specify resources, uncomment the following
+  # lines, adjust them as necessary, and remove the curly braces after 'resources:'.
+  # limits:
+  #   cpu: 100m
+  #   memory: 128Mi
+  # requests:
+  #   cpu: 100m
+  #   memory: 128Mi
+
+nodeSelector: {}
+
+tolerations: []
+
+affinity: {}

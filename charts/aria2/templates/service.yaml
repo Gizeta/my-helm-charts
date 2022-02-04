@@ -1,0 +1,23 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: {{ include "aria2.fullname" . }}
+  labels:
+    {{- include "aria2.labels" . | nindent 4 }}
+spec:
+  selector:
+    {{- include "aria2.selectorLabels" . | nindent 4 }}
+  type: {{ .Values.service.type }}
+  ports:
+    - port: {{ .Values.service.port }}
+      targetPort: {{ default 6800 .Values.config.rpcPort }}
+      protocol: TCP
+      name: rpc
+    - port: {{ .Values.service.btTcpPort }}
+      targetPort: {{ default 6888 .Values.config.listenPort }}
+      protocol: TCP
+      name: bt-tcp
+    - port: {{ .Values.service.dhtUdpPort }}
+      targetPort: {{ default 6888 .Values.config.listenPort }}
+      protocol: UDP
+      name: dht-udp

@@ -1,0 +1,22 @@
+{{- if .Values.traefik.ingressRouteUdp.enabled -}}
+{{- $fullName := include "aria2.fullname" . -}}
+apiVersion: traefik.containo.us/v1alpha1
+kind: IngressRouteUDP
+metadata:
+  name: {{ $fullName }}-udp
+  labels:
+    {{- include "aria2.labels" . | nindent 4 }}
+  {{- with .Values.traefik.ingressRouteUdp.annotations }}
+  annotations:
+    {{- toYaml . | nindent 4 }}
+  {{- end }}
+spec:
+  {{- with .Values.traefik.ingressRouteUdp.entryPoints }}
+  entryPoints:
+    {{- toYaml . | nindent 4 }}
+  {{- end }}
+  routes:
+    - services:
+        - name: {{ $fullName }}
+          port: {{ .Values.service.dhtUdpPort }}
+{{- end }}
