@@ -1,0 +1,36 @@
+{{- if .Values.traefik.ingressRoute.enabled -}}
+{{- $fullName := include "static-file-server.fullname" . -}}
+{{- $svcPort := .Values.service.port -}}
+apiVersion: traefik.containo.us/v1alpha1
+kind: IngressRoute
+metadata:
+  name: {{ $fullName }}
+  labels:
+    {{- include "static-file-server.labels" . | nindent 4 }}
+  {{- with .Values.traefik.ingressRoute.annotations }}
+  annotations:
+    {{- toYaml . | nindent 4 }}
+  {{- end }}
+spec:
+  {{- with .Values.traefik.ingressRoute.entryPoints }}
+  entryPoints:
+    {{- toYaml . | nindent 4 }}
+  {{- end }}
+  routes:
+    - match: {{ .Value.traefik.ingressRoute.matchRule }}
+      kind: Rule
+      services:
+        - name: {{ $fullName }}
+          port: {{ $svcPort }}
+          {{- if .Values.traefik.ingressRoute.serversTransport }}
+          serversTransport: {{ .Values.traefik.ingressRoute.serversTransport }}
+          {{- end }}
+      {{- if .Values.traefik.ingressRoute.middlewares }}
+      middlewares:
+        {{- toYaml .Values.traefik.ingressRoute.middlewares | nindent 8 }}
+      {{- end }}
+  {{- if .Values.traefik.ingressRoute.tls }}
+  tls:
+    {{- toYaml .Values.traefik.ingressRoute.tls | nindent 4 }}
+  {{- end }}
+{{- end }}
