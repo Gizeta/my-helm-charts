@@ -17,15 +17,15 @@ fullnameOverride: ""
 deployment:
   additionalVolumeMounts: []
   additionalArguments: []
-  additionalContainers:
-    livenessProbe:
-      httpGet:
-        path: /
-        port: http
-    readinessProbe:
-      httpGet:
-        path: /
-        port: http
+  additionalContainers: {}
+  #  livenessProbe:
+  #    httpGet:
+  #      path: /
+  #      port: http
+  #  readinessProbe:
+  #    httpGet:
+  #      path: /
+  #      port: http
 
 volumes:
   - name: webroot

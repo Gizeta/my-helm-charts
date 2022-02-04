@@ -17,7 +17,7 @@ spec:
     {{- toYaml . | nindent 4 }}
   {{- end }}
   routes:
-    - match: {{ .Value.traefik.ingressRoute.matchRule }}
+    - match: {{ .Values.traefik.ingressRoute.matchRule }}
       kind: Rule
       services:
         - name: {{ $fullName }}
