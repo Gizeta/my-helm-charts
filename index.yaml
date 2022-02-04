@@ -3,6 +3,16 @@ entries:
   static-file-server:
   - apiVersion: v2
     appVersion: v1.8.5
+    created: "2022-02-04T18:32:20.456805067Z"
+    description: static-file-server
+    digest: dd2acc62a7627b04eedb19fa64a4e4c5caa22a05ecc655f043b6683d8860f31e
+    name: static-file-server
+    type: application
+    urls:
+    - https://github.com/Gizeta/my-helm-charts/releases/download/static-file-server-0.3.0/static-file-server-0.3.0.tgz
+    version: 0.3.0
+  - apiVersion: v2
+    appVersion: v1.8.5
     created: "2022-02-04T17:10:49.316972811Z"
     description: static-file-server
     digest: aae0ab4e6a18e7a0006f73d7de5c0e2b362f499e7c7513a55ce28ccf5e45eea6
@@ -21,4 +31,4 @@ entries:
     urls:
     - https://github.com/Gizeta/my-helm-charts/releases/download/static-file-server-0.1.1/static-file-server-0.1.1.tgz
     version: 0.1.1
-generated: "2022-02-04T17:10:49.316983411Z"
+generated: "2022-02-04T18:32:20.456818267Z"
