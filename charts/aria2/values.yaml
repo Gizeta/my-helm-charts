@@ -15,31 +15,31 @@ nameOverride: ""
 fullnameOverride: ""
 
 config: {}
-#  uid: 0
-#  gid: 0
-#  umask: "022"
-#  rpcSecret: P3TERX
-#  rpcPort: 6800
-#  listenPort: 6888
-#  diskCache: 64M
-#  ipv6Mode: false
-#  updateTrackers: true
-#  customTrackerUrl: https://trackerslist.com/all_aria2.txt
-#  timezone: Asia/Shanghai
+  # uid: 0
+  # gid: 0
+  # umask: "022"
+  # rpcSecret: P3TERX
+  # rpcPort: 6800
+  # listenPort: 6888
+  # diskCache: 64M
+  # ipv6Mode: false
+  # updateTrackers: true
+  # customTrackerUrl: https://trackerslist.com/all_aria2.txt
+  # timezone: Asia/Shanghai
 
 deployment:
   additionalVolumeMounts: []
   additionalEnvVars: []
   additionalArguments: []
   additionalContainers: {}
-  #  livenessProbe:
-  #    httpGet:
-  #      path: /
-  #      port: http
-  #  readinessProbe:
-  #    httpGet:
-  #      path: /
-  #      port: http
+    # livenessProbe:
+    #   httpGet:
+    #     path: /
+    #     port: http
+    # readinessProbe:
+    #   httpGet:
+    #     path: /
+    #     port: http
 
 volumes:
   - name: downloads-dirs
@@ -77,12 +77,12 @@ traefik:
     #   - name: example-middlewares
     # serversTransport: example-server-transport 
     # tls:
-    #   - secretName: example-secret
+    #   secretName: example-secret
   ingressRouteTcp:
     enabled: false
     annotations: {}
     entryPoints: []
-    #  - aria2-tcp
+      # - aria2-tcp
     matchRule: Host(`*`)
     # middlewares:
     #   - name: example-middlewares
@@ -90,7 +90,7 @@ traefik:
     enabled: false
     annotations: {}
     entryPoints: []
-    #  - aria2-udp
+      # - aria2-udp
 
 resources: {}
   # We usually recommend not to specify default resources and to leave this as a conscious

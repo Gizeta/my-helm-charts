@@ -17,7 +17,6 @@ spec:
   {{- end }}
   routes:
     - match: {{ .Values.traefik.ingressRouteTcp.matchRule }}
-      kind: Rule
       services:
         - name: {{ $fullName }}
           port: {{ .Values.service.btTcpPort }}

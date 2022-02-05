@@ -15,31 +15,31 @@ nameOverride: ""
 fullnameOverride: ""
 
 config: {}
-#  cors: false
-#  debug: false
-#  host: ""
-#  port: 8080
-#  showListing: true
-#  folder: /web
-#  urlPrefix: ""
-#  tlsCert: ""
-#  tlsKey: ""
-#  tlsMinVers: ""
-#  referrers: ""
+  # cors: false
+  # debug: false
+  # host: ""
+  # port: 8080
+  # showListing: true
+  # folder: /web
+  # urlPrefix: ""
+  # tlsCert: ""
+  # tlsKey: ""
+  # tlsMinVers: ""
+  # referrers: ""
 
 deployment:
   additionalVolumeMounts: []
   additionalEnvVars: []
   additionalArguments: []
   additionalContainers: {}
-  #  livenessProbe:
-  #    httpGet:
-  #      path: /
-  #      port: http
-  #  readinessProbe:
-  #    httpGet:
-  #      path: /
-  #      port: http
+    # livenessProbe:
+    #   httpGet:
+    #     path: /
+    #     port: http
+    # readinessProbe:
+    #   httpGet:
+    #     path: /
+    #     port: http
 
 volumes:
   - name: webroot
@@ -70,10 +70,10 @@ traefik:
       - web
     matchRule: Host(`example.domain.tld`)
     # middlewares:
-    #  - name: example-middlewares
+    #   - name: example-middlewares
     # serversTransport: example-server-transport 
     # tls:
-    #  - secretName: example-secret
+    #   secretName: example-secret
 
 resources: {}
   # We usually recommend not to specify default resources and to leave this as a conscious
