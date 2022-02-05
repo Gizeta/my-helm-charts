@@ -39,49 +39,49 @@ spec:
               {{- toYaml . | nindent 12 }}
             {{- end }}
           env:
-            {{- if .Values.config.uid }}
+            {{- if hasKey .Values.config "uid" }}
             - name: PUID
-              value: {{ .Values.config.uid }}
+              value: {{ .Values.config.uid | quote }}
             {{- end }}
-            {{- if .Values.config.gid }}
+            {{- if hasKey .Values.config "gid" }}
             - name: PGID
-              value: {{ .Values.config.gid }}
+              value: {{ .Values.config.gid | quote }}
             {{- end }}
-            {{- if .Values.config.umask }}
+            {{- if hasKey .Values.config "umask" }}
             - name: UMASK_SET
-              value: {{ .Values.config.umask }}
+              value: {{ .Values.config.umask | quote }}
             {{- end }}
-            {{- if .Values.config.rpcSecret }}
+            {{- if hasKey .Values.config "rpcSecret" }}
             - name: RPC_SECRET
-              value: {{ .Values.config.rpcSecret }}
+              value: {{ .Values.config.rpcSecret | quote }}
             {{- end }}
-            {{- if .Values.config.rpcPort }}
+            {{- if hasKey .Values.config "rpcPort" }}
             - name: RPC_PORT
-              value: {{ .Values.config.rpcPort }}
+              value: {{ .Values.config.rpcPort | quote }}
             {{- end }}
-            {{- if .Values.config.listenPort }}
+            {{- if hasKey .Values.config "listenPort" }}
             - name: LISTEN_PORT
-              value: {{ .Values.config.listenPort }}
+              value: {{ .Values.config.listenPort | quote }}
             {{- end }}
-            {{- if .Values.config.diskCache }}
+            {{- if hasKey .Values.config "diskCache" }}
             - name: DISK_CACHE
-              value: {{ .Values.config.diskCache }}
+              value: {{ .Values.config.diskCache | quote }}
             {{- end }}
-            {{- if .Values.config.ipv6Mode }}
+            {{- if hasKey .Values.config "ipv6Mode" }}
             - name: IPV6_MODE
-              value: {{ .Values.config.ipv6Mode }}
+              value: {{ .Values.config.ipv6Mode | quote }}
             {{- end }}
-            {{- if .Values.config.updateTrackers }}
+            {{- if hasKey .Values.config "updateTrackers" }}
             - name: UPDATE_TRACKERS
-              value: {{ .Values.config.updateTrackers }}
+              value: {{ .Values.config.updateTrackers | quote }}
             {{- end }}
-            {{- if .Values.config.customTrackerUrl }}
+            {{- if hasKey .Values.config "customTrackerUrl" }}
             - name: CUSTOM_TRACKER_URL
-              value: {{ .Values.config.customTrackerUrl }}
+              value: {{ .Values.config.customTrackerUrl | quote }}
             {{- end }}
-            {{- if .Values.config.timezone }}
+            {{- if hasKey .Values.config "timezone" }}
             - name: TZ
-              value: {{ .Values.config.timezone }}
+              value: {{ .Values.config.timezone | quote }}
             {{- end }}
             {{- with .Values.deployment.additionalEnvVars }}
               {{- toYaml . | nindent 12 }}

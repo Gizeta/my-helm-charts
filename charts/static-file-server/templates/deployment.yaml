@@ -38,49 +38,49 @@ spec:
               {{- toYaml . | nindent 12 }}
             {{- end }}
           env:
-            {{- if .Values.config.cors }}
+            {{- if hasKey .Values.config "cors" }}
             - name: CORS
-              value: {{ .Values.config.cors }}
+              value: {{ .Values.config.cors | quote }}
             {{- end }}
-            {{- if .Values.config.debug }}
+            {{- if hasKey .Values.config "debug" }}
             - name: DEBUG
-              value: {{ .Values.config.debug }}
+              value: {{ .Values.config.debug | quote }}
             {{- end }}
-            {{- if .Values.config.host }}
+            {{- if hasKey .Values.config "host" }}
             - name: HOST
-              value: {{ .Values.config.host }}
+              value: {{ .Values.config.host | quote }}
             {{- end }}
-            {{- if .Values.config.port }}
+            {{- if hasKey .Values.config "port" }}
             - name: PORT
-              value: {{ .Values.config.port }}
+              value: {{ .Values.config.port | quote }}
             {{- end }}
-            {{- if .Values.config.showListing }}
+            {{- if hasKey .Values.config "showListing" }}
             - name: SHOW_LISTING
-              value: {{ .Values.config.showListing }}
+              value: {{ .Values.config.showListing | quote }}
             {{- end }}
-            {{- if .Values.config.folder }}
+            {{- if hasKey .Values.config "folder" }}
             - name: FOLDER
-              value: {{ .Values.config.folder }}
+              value: {{ .Values.config.folder | quote }}
             {{- end }}
-            {{- if .Values.config.urlPrefix }}
+            {{- if hasKey .Values.config "urlPrefix" }}
             - name: URL_PREFIX
-              value: {{ .Values.config.urlPrefix }}
+              value: {{ .Values.config.urlPrefix | quote }}
             {{- end }}
-            {{- if .Values.config.tlsCert }}
+            {{- if hasKey .Values.config "tlsCert" }}
             - name: TLS_CERT
-              value: {{ .Values.config.tlsCert }}
+              value: {{ .Values.config.tlsCert | quote }}
             {{- end }}
-            {{- if .Values.config.tlsKey }}
+            {{- if hasKey .Values.config "tlsKey" }}
             - name: TLS_KEY
-              value: {{ .Values.config.tlsKey }}
+              value: {{ .Values.config.tlsKey | quote }}
             {{- end }}
-            {{- if .Values.config.tlsMinVers }}
+            {{- if hasKey .Values.config "tlsMinVers" }}
             - name: TLS_MIN_VERS
-              value: {{ .Values.config.tlsMinVers }}
+              value: {{ .Values.config.tlsMinVers | quote }}
             {{- end }}
-            {{- if .Values.config.referrers }}
+            {{- if hasKey .Values.config "referrers" }}
             - name: REFERRERS
-              value: {{ .Values.config.referrers }}
+              value: {{ .Values.config.referrers | quote }}
             {{- end }}
             {{- with .Values.deployment.additionalEnvVars }}
               {{- toYaml . | nindent 12 }}
