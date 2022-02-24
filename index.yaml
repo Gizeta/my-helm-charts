@@ -31,6 +31,17 @@ entries:
     urls:
     - https://github.com/Gizeta/my-helm-charts/releases/download/aria2-0.1.0/aria2-0.1.0.tgz
     version: 0.1.0
+  registry:
+  - apiVersion: v2
+    appVersion: 2.8.0
+    created: "2022-02-24T12:21:02.737896801Z"
+    description: registry
+    digest: 934cd96247e952a869b06793cc120a10128cd8933af590e9a01f3bc3075850a1
+    name: registry
+    type: application
+    urls:
+    - https://github.com/Gizeta/my-helm-charts/releases/download/registry-0.1.0/registry-0.1.0.tgz
+    version: 0.1.0
   static-file-server:
   - apiVersion: v2
     appVersion: v1.8.5
@@ -92,4 +103,4 @@ entries:
     urls:
     - https://github.com/Gizeta/my-helm-charts/releases/download/static-file-server-0.1.1/static-file-server-0.1.1.tgz
     version: 0.1.1
-generated: "2022-02-05T18:26:01.156298664Z"
+generated: "2022-02-24T12:21:02.738012002Z"
