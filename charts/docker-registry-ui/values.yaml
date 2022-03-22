@@ -1,0 +1,86 @@
+# Default values for docker-registry-ui.
+# This is a YAML-formatted file.
+# Declare variables to be passed into your templates.
+
+replicaCount: 1
+
+image:
+  repository: docker-registry-ui
+  pullPolicy: IfNotPresent
+  # Overrides the image tag whose default is the chart appVersion.
+  tag: ""
+
+imagePullSecrets: []
+nameOverride: ""
+fullnameOverride: ""
+
+config: {}
+  # registryUrl: "http://registry.example.com"
+  # registryTitle: "http://registry.example.com"
+  # pullUrl: "http://registry.example.com"
+  # deleteImages: false
+  # showContentDigest: true
+  # catalogElementsLimit: 100000
+  # singleRegistry: false
+
+deployment:
+  additionalVolumeMounts: []
+  additionalEnvVars: []
+  additionalArguments: []
+  additionalContainers: {}
+    # livenessProbe:
+    #   httpGet:
+    #     path: /
+    #     port: http
+    # readinessProbe:
+    #   httpGet:
+    #     path: /
+    #     port: http
+
+podAnnotations: {}
+
+podSecurityContext: {}
+  # fsGroup: 2000
+
+securityContext: {}
+  # capabilities:
+  #   drop:
+  #   - ALL
+  # readOnlyRootFilesystem: true
+  # runAsNonRoot: true
+  # runAsUser: 1000
+
+service:
+  type: ClusterIP
+  port: 80
+
+traefik:
+  ingressRoute:
+    enabled: false
+    annotations: {}
+    entryPoints:
+      - web
+    matchRule: Host(`example.domain.tld`)
+    # middlewares:
+    #   - name: example-middlewares
+    # serversTransport: example-server-transport 
+    # tls:
+    #   secretName: example-secret
+
+resources: {}
+  # We usually recommend not to specify default resources and to leave this as a conscious
+  # choice for the user. This also increases chances charts run on environments with little
+  # resources, such as Minikube. If you do want to specify resources, uncomment the following
+  # lines, adjust them as necessary, and remove the curly braces after 'resources:'.
+  # limits:
+  #   cpu: 100m
+  #   memory: 128Mi
+  # requests:
+  #   cpu: 100m
+  #   memory: 128Mi
+
+nodeSelector: {}
+
+tolerations: []
+
+affinity: {}
