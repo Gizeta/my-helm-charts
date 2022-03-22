@@ -31,6 +31,17 @@ entries:
     urls:
     - https://github.com/Gizeta/my-helm-charts/releases/download/aria2-0.1.0/aria2-0.1.0.tgz
     version: 0.1.0
+  docker-registry-ui:
+  - apiVersion: v2
+    appVersion: 2.1.0
+    created: "2022-03-22T10:39:55.936722918Z"
+    description: docker-registry-ui
+    digest: a8f4ed4f1dedbbe32e934750cbaaf0570f9f2b51bf6e5dd61564eab16fec8a2d
+    name: docker-registry-ui
+    type: application
+    urls:
+    - https://github.com/Gizeta/my-helm-charts/releases/download/docker-registry-ui-0.1.0/docker-registry-ui-0.1.0.tgz
+    version: 0.1.0
   registry:
   - apiVersion: v2
     appVersion: 2.8.0
@@ -103,4 +114,4 @@ entries:
     urls:
     - https://github.com/Gizeta/my-helm-charts/releases/download/static-file-server-0.1.1/static-file-server-0.1.1.tgz
     version: 0.1.1
-generated: "2022-02-24T12:21:02.738012002Z"
+generated: "2022-03-22T10:39:55.936744419Z"
