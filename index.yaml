@@ -34,6 +34,16 @@ entries:
   docker-registry-ui:
   - apiVersion: v2
     appVersion: 2.1.0
+    created: "2022-03-23T10:40:16.182916147Z"
+    description: docker-registry-ui
+    digest: ee6c8b538e2ea9b73593aae5a561742e3d97a6e2dc36464695462287bd4aa45b
+    name: docker-registry-ui
+    type: application
+    urls:
+    - https://github.com/Gizeta/my-helm-charts/releases/download/docker-registry-ui-0.1.1/docker-registry-ui-0.1.1.tgz
+    version: 0.1.1
+  - apiVersion: v2
+    appVersion: 2.1.0
     created: "2022-03-22T10:39:55.936722918Z"
     description: docker-registry-ui
     digest: a8f4ed4f1dedbbe32e934750cbaaf0570f9f2b51bf6e5dd61564eab16fec8a2d
@@ -114,4 +124,4 @@ entries:
     urls:
     - https://github.com/Gizeta/my-helm-charts/releases/download/static-file-server-0.1.1/static-file-server-0.1.1.tgz
     version: 0.1.1
-generated: "2022-03-22T10:39:55.936744419Z"
+generated: "2022-03-23T10:40:16.182981348Z"
