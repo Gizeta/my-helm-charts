@@ -16,10 +16,25 @@ spec:
   entryPoints:
     {{- toYaml . | nindent 4 }}
   {{- end }}
-  {{- with .routes }}
   routes:
-    {{- toYaml . | nindent 4 }}
-  {{- end }}
+    {{- range .routes }}
+    - services:
+        - name: {{ $fullName }}
+          port: {{ .svcPort }}
+          {{- if .service }}
+          {{- toYaml .service | nindent 10 }}
+          {{- end }}
+      {{- if .match }}
+      match: {{ .match }}
+      {{- end }}
+      {{- if .kind }}
+      kind: {{ .kind }}
+      {{- end }}
+      {{- if .middlewares }}
+      middlewares:
+        {{- toYaml .middlewares | nindent 8 }}
+      {{- end }}
+    {{- end }}
   {{- if .tls }}
   tls:
     {{- toYaml .tls | nindent 4 }}
