@@ -63,6 +63,17 @@ entries:
     urls:
     - https://github.com/Gizeta/my-helm-charts/releases/download/docker-registry-ui-0.1.0/docker-registry-ui-0.1.0.tgz
     version: 0.1.0
+  generic:
+  - apiVersion: v2
+    appVersion: "1.0"
+    created: "2022-06-05T02:42:57.643221309Z"
+    description: generic
+    digest: 6bb301940b907485fadd202517ef0d3434ef3b8ab916bb40594612b350523c97
+    name: generic
+    type: application
+    urls:
+    - https://github.com/Gizeta/my-helm-charts/releases/download/generic-0.1.0/generic-0.1.0.tgz
+    version: 0.1.0
   registry:
   - apiVersion: v2
     appVersion: 2.8.0
@@ -135,4 +146,4 @@ entries:
     urls:
     - https://github.com/Gizeta/my-helm-charts/releases/download/static-file-server-0.1.1/static-file-server-0.1.1.tgz
     version: 0.1.1
-generated: "2022-05-03T09:41:21.231200028Z"
+generated: "2022-06-05T02:42:57.64326051Z"
