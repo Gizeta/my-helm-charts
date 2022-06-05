@@ -6,7 +6,7 @@ kind: {{ .kind | default "IngressRoute" }}
 metadata:
   name: {{ $fullName }}-{{ .name }}
   labels:
-    {{- include "generic.labels" . | nindent 4 }}
+    {{- include "generic.labels" $ | nindent 4 }}
   {{- with .annotations }}
   annotations:
     {{- toYaml . | nindent 4 }}
