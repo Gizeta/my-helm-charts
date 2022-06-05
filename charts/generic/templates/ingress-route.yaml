@@ -1,7 +1,7 @@
 {{- $fullName := include "generic.fullname" . -}}
 {{- range .Values.ingressRoutes }}
-{{- if .enabled -}}
 ---
+{{- if .enabled -}}
 apiVersion: traefik.containo.us/v1alpha1
 kind: {{ .kind | default "IngressRoute" }}
 metadata:
