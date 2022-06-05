@@ -1,0 +1,28 @@
+{{- $fullName := include "generic.fullname" . -}}
+{{- range .Values.ingressRoutes }}
+{{- if .enabled -}}
+apiVersion: traefik.containo.us/v1alpha1
+kind: {{ .kind | default "IngressRoute" }}
+metadata:
+  name: {{ $fullName }}-{{ .name }}
+  labels:
+    {{- include "generic.labels" . | nindent 4 }}
+  {{- with .annotations }}
+  annotations:
+    {{- toYaml . | nindent 4 }}
+  {{- end }}
+spec:
+  {{- with .entryPoints }}
+  entryPoints:
+    {{- toYaml . | nindent 4 }}
+  {{- end }}
+  {{- with .routes }}
+  routes:
+    {{- toYaml . | nindent 4 }}
+  {{- end }}
+  {{- if .tls }}
+  tls:
+    {{- toYaml .tls | nindent 4 }}
+  {{- end }}
+{{- end }}
+{{- end }}
