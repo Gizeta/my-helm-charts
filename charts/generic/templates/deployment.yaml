@@ -44,7 +44,7 @@ spec:
             {{- end }}
           ports:
             {{- range .Values.ports }}
-            - port: {{ .containerPort }}
+            - containerPort: {{ .containerPort }}
               name: {{ .name }}
               protocol: {{ .protocol | default "TCP" }}
             {{- end }}
