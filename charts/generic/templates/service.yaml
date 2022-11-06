@@ -14,6 +14,9 @@ spec:
       targetPort: {{ .containerPort }}
       protocol: {{ .protocol | default "TCP" }}
       name: {{ .name }}
+      {{- if .nodePort }}
+      nodePort: {{ .nodePort }}
+      {{- end }}
     {{- end }}
   {{- with .Values.service.additionalParameters }}
     {{- toYaml . | nindent 2 }}
