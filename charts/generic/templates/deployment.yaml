@@ -30,24 +30,32 @@ spec:
             {{- toYaml .Values.securityContext | nindent 12 }}
           image: "{{ .Values.image.repository }}:{{ .Values.image.tag }}"
           imagePullPolicy: {{ .Values.image.pullPolicy }}
+          {{- if .Values.deployment.volumeMounts }}
           volumeMounts:
             {{- with .Values.deployment.volumeMounts }}
               {{- toYaml . | nindent 12 }}
             {{- end }}
+          {{- end }}
+          {{- if .Values.deployment.env }}
           env:
             {{- with .Values.deployment.env }}
               {{- toYaml . | nindent 12 }}
             {{- end }}
+          {{- end }}
+          {{- if .Values.deployment.args }}
           args:
             {{- with .Values.deployment.args }}
               {{- toYaml . | nindent 12 }}
             {{- end }}
+          {{- end }}
+          {{- if .Values.ports }}
           ports:
             {{- range .Values.ports }}
             - containerPort: {{ .containerPort }}
               name: {{ .name }}
               protocol: {{ .protocol | default "TCP" }}
             {{- end }}
+          {{- end }}
           resources:
             {{- toYaml .Values.resources | nindent 12 }}
           {{- with .Values.deployment.additionalParameters }}

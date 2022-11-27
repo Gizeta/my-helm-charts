@@ -48,19 +48,28 @@ ports: []
   #   svcPort: 80
   #   containerPort: 80
 
-service:
-  type: ClusterIP
-  additionalParameters: {}
-    # externalTrafficPolicy: Local
+services: []
+  # - enabled: true
+  #   name: default
+  #   type: ClusterIP
+  #   ports:
+  #     - web
+  #   additionalParameters:
+  #     externalTrafficPolicy: Local
 
 ingressRoutes: []
-  # enabled: true
-  # kind: IngressRoute
-  # name: web
-  # annotations: {}
-  # entryPoints: []
-  # routes: []
-  # tls: {}
+  # - enabled: true
+  #   kind: IngressRoute
+  #   name: default
+  #   annotations: {}
+  #   entryPoints: []
+  #   routes: []
+  #   tls: {}
+
+ciliumNetworkPolicies: []
+  # - enabled: true
+  #   ingressPorts:
+  #   - web
 
 resources: {}
   # We usually recommend not to specify default resources and to leave this as a conscious

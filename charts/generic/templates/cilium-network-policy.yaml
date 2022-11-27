@@ -1,0 +1,28 @@
+{{- $fullName := include "generic.fullname" . -}}
+{{- range .Values.ciliumNetworkPolicies }}
+---
+{{- if .enabled -}}
+apiVersion: "cilium.io/v2"
+kind: CiliumNetworkPolicy
+metadata:
+  name: {{ $fullName }}-{{ .name | default "default" }}
+  labels:
+    {{- include "generic.labels" $ | nindent 4 }}
+spec:
+  endpointSelector:
+    matchLabels:
+      {{- include "generic.selectorLabels" $ | nindent 6 }}
+  ingress:
+  - toPorts:
+    - ports:
+      {{- range .ingressPorts }}
+      {{- $port := . -}}
+      {{- range $.Values.ports }}
+      {{- if eq .name $port }}
+      - port: "{{ .svcPort }}"
+        protocol: {{ .protocol | default "TCP" }}
+      {{- end }}
+      {{- end }}
+      {{- end }}
+{{- end }}
+{{- end }}

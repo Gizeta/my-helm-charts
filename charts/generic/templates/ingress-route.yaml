@@ -5,7 +5,7 @@
 apiVersion: traefik.containo.us/v1alpha1
 kind: {{ .kind | default "IngressRoute" }}
 metadata:
-  name: {{ $fullName }}-{{ .name }}
+  name: {{ $fullName }}-{{ .name | default "default" }}
   labels:
     {{- include "generic.labels" $ | nindent 4 }}
   {{- with .annotations }}
@@ -20,10 +20,12 @@ spec:
   routes:
     {{- range .routes }}
     - services:
-        - name: {{ $fullName }}
+        - name: {{ $fullName }}-{{ .svcName | default "default" }}
+          {{- $port := .svcPort -}}
+          {{- range $.Values.ports }}
+          {{- if eq .name $port}}
           port: {{ .svcPort }}
-          {{- if .service }}
-          {{- toYaml .service | nindent 10 }}
+          {{- end }}
           {{- end }}
       {{- if .match }}
       match: {{ .match }}

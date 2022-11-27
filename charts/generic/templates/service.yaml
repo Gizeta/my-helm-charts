@@ -1,15 +1,22 @@
+{{- $fullName := include "generic.fullname" . -}}
+{{- range .Values.services }}
+---
+{{- if .enabled -}}
 apiVersion: v1
 kind: Service
 metadata:
-  name: {{ include "generic.fullname" . }}
+  name: {{ $fullName }}-{{ .name | default "default" }}
   labels:
-    {{- include "generic.labels" . | nindent 4 }}
+    {{- include "generic.labels" $ | nindent 4 }}
 spec:
   selector:
-    {{- include "generic.selectorLabels" . | nindent 4 }}
-  type: {{ .Values.service.type }}
+    {{- include "generic.selectorLabels" $ | nindent 4 }}
+  type: {{ .type }}
   ports:
-    {{- range .Values.ports }}
+    {{- range .ports }}
+    {{- $port := . -}}
+    {{- range $.Values.ports }}
+    {{- if eq .name $port }}
     - port: {{ .svcPort }}
       targetPort: {{ .containerPort }}
       protocol: {{ .protocol | default "TCP" }}
@@ -18,6 +25,10 @@ spec:
       nodePort: {{ .nodePort }}
       {{- end }}
     {{- end }}
-  {{- with .Values.service.additionalParameters }}
+    {{- end }}
+    {{- end }}
+  {{- with .additionalParameters }}
     {{- toYaml . | nindent 2 }}
   {{- end }}
+{{- end }}
+{{- end }}
