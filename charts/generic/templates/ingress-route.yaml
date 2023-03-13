@@ -37,6 +37,9 @@ spec:
       middlewares:
         {{- toYaml .middlewares | nindent 8 }}
       {{- end }}
+      {{- if gte .priority 0 }}
+      priority: {{ .priority }}
+      {{- end }}
     {{- end }}
   {{- if .tls }}
   tls:

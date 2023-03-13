@@ -12,17 +12,21 @@ spec:
   endpointSelector:
     matchLabels:
       {{- include "generic.selectorLabels" $ | nindent 6 }}
+  {{- with .ingress }}
   ingress:
-  - toPorts:
-    - ports:
-      {{- range .ingressPorts }}
-      {{- $port := . -}}
-      {{- range $.Values.ports }}
-      {{- if eq .name $port }}
-      - port: "{{ .svcPort }}"
-        protocol: {{ .protocol | default "TCP" }}
-      {{- end }}
-      {{- end }}
-      {{- end }}
+    {{- toYaml . | nindent 4 }}
+  {{- end }}
+  {{- with .ingressDeny }}
+  ingressDeny:
+    {{- toYaml . | nindent 4 }}
+  {{- end }}
+  {{- with .egress }}
+  egress:
+    {{- toYaml . | nindent 4 }}
+  {{- end }}
+  {{- with .egressDeny }}
+  egressDeny:
+    {{- toYaml . | nindent 4 }}
+  {{- end }}
 {{- end }}
 {{- end }}
