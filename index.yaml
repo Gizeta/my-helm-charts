@@ -66,6 +66,16 @@ entries:
   generic:
   - apiVersion: v2
     appVersion: "1.0"
+    created: "2023-03-13T15:48:48.295233418Z"
+    description: generic
+    digest: 145e826fc4c193d10937c3c3701e36abcfc609f16a7fc1cadbf1dd541b91821c
+    name: generic
+    type: application
+    urls:
+    - https://github.com/Gizeta/my-helm-charts/releases/download/generic-0.3.0/generic-0.3.0.tgz
+    version: 0.3.0
+  - apiVersion: v2
+    appVersion: "1.0"
     created: "2023-01-18T08:38:36.303715956Z"
     description: generic
     digest: 645568c1fa9c98f340896a73b6738f4a9b4153eeaee321ad5fb94118456d68ae
@@ -226,4 +236,4 @@ entries:
     urls:
     - https://github.com/Gizeta/my-helm-charts/releases/download/static-file-server-0.1.1/static-file-server-0.1.1.tgz
     version: 0.1.1
-generated: "2023-01-18T08:38:36.303773459Z"
+generated: "2023-03-13T15:48:48.295290319Z"
