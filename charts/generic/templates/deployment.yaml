@@ -9,6 +9,10 @@ spec:
   selector:
     matchLabels:
       {{- include "generic.selectorLabels" . | nindent 6 }}
+  {{- with .Values.strategy }}
+  strategy:
+    {{- toYaml . | nindent 4 }}
+  {{- end }}
   template:
     metadata:
       {{- with .Values.podAnnotations }}
@@ -20,10 +24,6 @@ spec:
         {{- if .Values.podAdditionalLabels }}
           {{- toYaml .Values.podAdditionalLabels | nindent 8 }}
         {{- end }}
-    {{- with .Values.strategy }}
-    strategy:
-      {{- toYaml . | nindent 6 }}
-    {{- end }}
     spec:
       {{- with .Values.imagePullSecrets }}
       imagePullSecrets:
