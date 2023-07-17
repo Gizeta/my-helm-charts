@@ -57,7 +57,7 @@ services: []
   #   additionalParameters:
   #     externalTrafficPolicy: Local
 
-ingressRoutes: []
+traefikIngressRoutes: []
   # - enabled: true
   #   kind: IngressRoute
   #   name: default
