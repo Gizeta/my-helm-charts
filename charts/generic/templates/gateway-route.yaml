@@ -1,0 +1,21 @@
+{{- $fullName := include "generic.fullname" . -}}
+{{- range .Values.gatewayRoutes }}
+---
+{{- if .enabled -}}
+{{- if eq .kind "TLSRoute" -}}
+apiVersion: gateway.networking.k8s.io/v1alpha2
+{{- else }}
+apiVersion: gateway.networking.k8s.io/v1
+{{- end }}
+kind: {{ .kind }}
+metadata:
+  name: {{ $fullName }}-{{ .name | default "default" }}
+  labels:
+    {{- include "generic.labels" $ | nindent 4 }}
+  {{- with .annotations }}
+  annotations:
+    {{ toYaml . | nindent 4 }}
+  {{- end }}
+spec:
+  {{ toYaml .spec | nindent 2 }}
+{{- end }}

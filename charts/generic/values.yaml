@@ -71,6 +71,29 @@ ciliumNetworkPolicies: []
   #   ingressPorts:
   #   - web
 
+gatewayRoutes: []
+  # - enabled: true
+  #   kind: HTTPRoute
+  #   spec:
+  #     parentRefs:
+  #     - name: default
+  #       sectionName: http
+  #     hostnames: *
+  #     rules:
+  #     - matches:
+  #       - path:
+  #           type: PathPrefix
+  #           value: /
+  #       filters:
+  #       - type: RequestHeaderModifier
+  #         requestHeaderModifier:
+  #           add:
+  #           - name: header_name
+  #             value: header_value
+  #       backendRefs:
+  #       - name: default
+  #         port: 80
+
 resources: {}
   # We usually recommend not to specify default resources and to leave this as a conscious
   # choice for the user. This also increases chances charts run on environments with little
