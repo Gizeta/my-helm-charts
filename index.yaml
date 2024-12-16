@@ -265,6 +265,17 @@ entries:
     urls:
     - https://github.com/Gizeta/my-helm-charts/releases/download/registry-0.1.0/registry-0.1.0.tgz
     version: 0.1.0
+  simple:
+  - apiVersion: v2
+    appVersion: "1.0"
+    created: "2024-12-16T08:08:02.91556697Z"
+    description: simple
+    digest: 7993b26317f7502e0e90fe9f11db288169881077d2d492dfaabff71c404be7f0
+    name: simple
+    type: application
+    urls:
+    - https://github.com/Gizeta/my-helm-charts/releases/download/simple-0.1.0/simple-0.1.0.tgz
+    version: 0.1.0
   static-file-server:
   - apiVersion: v2
     appVersion: v1.8.5
@@ -326,4 +337,4 @@ entries:
     urls:
     - https://github.com/Gizeta/my-helm-charts/releases/download/static-file-server-0.1.1/static-file-server-0.1.1.tgz
     version: 0.1.1
-generated: "2024-12-13T12:30:28.726869949Z"
+generated: "2024-12-16T08:08:02.915727369Z"
