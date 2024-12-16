@@ -65,4 +65,8 @@ Default deployment spec
 selector:
   matchLabels:
     {{- include "generic.selectorLabels" . | nindent 4 }}
+template:
+  metadata:
+    labels:
+      {{- include "generic.selectorLabels" . | nindent 6 }}
 {{- end }}
