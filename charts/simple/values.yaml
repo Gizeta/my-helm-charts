@@ -1,0 +1,20 @@
+nameOverride: ""
+fullnameOverride: ""
+
+resources: []
+# - enabled: true
+#   name: deploy
+#   kind: Deployment
+#   apiVersion: apps/v1
+#   metadata:
+#     labels:
+#       a: "1"
+#   spec:
+#     selector:
+#       matchLabels:
+#         ccc: '2342'
+#     template:
+#       spec:
+#         containers:
+#         - name: a
+#           image: a

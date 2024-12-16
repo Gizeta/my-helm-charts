@@ -1,0 +1,18 @@
+{{- $defaultMetadata := fromYaml (include "generic.defaultMetadata" .) -}}
+{{- $defaultDeploymentSpec := fromYaml (include "generic.defaultDeploymentSpec" .) -}}
+{{- range .Values.resources }}
+---
+{{- if .enabled }}
+apiVersion: {{ .apiVersion }}
+kind: {{ .kind }}
+metadata:
+  name: {{ include "generic.fullname" $ }}{{ if .name }}-{{ .name }}{{ end }}
+  {{- toYaml (merge .metadata $defaultMetadata) | nindent 2 }}
+spec:
+  {{- if eq .kind "Deployment" }}
+  {{- toYaml (merge .spec $defaultDeploymentSpec) | nindent 2 }}
+  {{- else }}
+  {{- toYaml .spec | nindent 2 }}
+  {{- end }}
+{{- end }}
+{{- end }}
