@@ -51,7 +51,7 @@ app.kubernetes.io/instance: {{ .Release.Name }}
 {{- end }}
 
 {{/*
-Default metadata
+Default generic metadata
 */}}
 {{- define "generic.defaultMetadata" -}}
 labels:
@@ -59,7 +59,7 @@ labels:
 {{- end }}
 
 {{/*
-Default deployment spec
+Default Deployment spec
 */}}
 {{- define "generic.defaultDeploymentSpec" -}}
 selector:
@@ -69,4 +69,21 @@ template:
   metadata:
     labels:
       {{- include "generic.selectorLabels" . | nindent 6 }}
+{{- end }}
+
+{{/*
+Default Service spec
+*/}}
+{{- define "generic.defaultServiceSpec" -}}
+selector:
+  {{- include "generic.selectorLabels" . | nindent 2 }}
+{{- end }}
+
+{{/*
+Default CiliumNetworkPolicy spec
+*/}}
+{{- define "generic.defaultCiliumNetworkPolicySpec" -}}
+endpointSelector:
+  matchLabels:
+    {{- include "generic.selectorLabels" . | nindent 4 }}
 {{- end }}

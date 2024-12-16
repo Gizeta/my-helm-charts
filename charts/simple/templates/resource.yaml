@@ -1,18 +1,24 @@
-{{- $defaultMetadata := fromYaml (include "generic.defaultMetadata" .) -}}
-{{- $defaultDeploymentSpec := fromYaml (include "generic.defaultDeploymentSpec" .) -}}
 {{- range .Values.resources }}
 ---
 {{- if .enabled }}
+{{- $defaultSpec := default dict -}}
+{{- if or (eq .kind "Deployment") (eq .kind "DaemonSet") -}}
+  {{- $defaultSpec = fromYaml (include "generic.defaultDeploymentSpec" $) -}}
+{{- else -}}
+  {{- if eq .kind "Service" -}}
+    {{- $defaultSpec = fromYaml (include "generic.defaultServiceSpec" $) -}}
+  {{- else -}}
+    {{- if eq .kind "CiliumNetworkPolicy" -}}
+      {{- $defaultSpec = fromYaml (include "generic.defaultCiliumNetworkPolicySpec" $) -}}
+    {{- end -}}
+  {{- end -}}
+{{- end -}}
 apiVersion: {{ .apiVersion }}
 kind: {{ .kind }}
 metadata:
   name: {{ include "generic.fullname" $ }}{{ if .name }}-{{ .name }}{{ end }}
-  {{- toYaml (merge (default .metadata) $defaultMetadata) | nindent 2 }}
+  {{- toYaml (merge (default .metadata) (fromYaml (include "generic.defaultMetadata" $))) | nindent 2 }}
 spec:
-  {{- if or (eq .kind "Deployment") (eq .kind "DaemonSet") }}
-  {{- toYaml (merge (default .spec) $defaultDeploymentSpec) | nindent 2 }}
-  {{- else }}
-  {{- toYaml (default .spec) | nindent 2 }}
-  {{- end }}
+  {{- toYaml (merge (default .spec) $defaultSpec) | nindent 2 }}
 {{- end }}
 {{- end }}
